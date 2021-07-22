@@ -66,4 +66,5 @@ end
 # Adds shoulda-matchers
 group :test do
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'rails-controller-testing'
 end

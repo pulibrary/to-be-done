@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
+  let(:users) { User.all }
+
   describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    it "assigns all users to @users" do
+      get "/users" 
+      expect(assigns(:users)).to eq(users)
+    end
   end
 end
