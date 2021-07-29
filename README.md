@@ -1,5 +1,7 @@
 # README
 
+[![PULibrary](https://circleci.com/gh/pulibrary/to-be-done.svg?style=svg)](https://app.circleci.com/pipelines/github/pulibrary/to-be-done)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
