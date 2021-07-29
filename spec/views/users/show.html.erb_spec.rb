@@ -12,21 +12,9 @@ RSpec.describe "users/show" do
     expect(rendered).to match /Alina Starkov/
   end
 
-  it "has link to edit" do
+  it "has link back to users#index" do
     render
 
-    expect(rendered).to have_link "Edit", href: edit_user_path(new_user)
-  end
-
-  it "has link to destroy" do
-    render
-
-    expect(rendered).to have_link "Destroy", href: user_path(new_user)
-  end
-
-  it "has link back to index" do
-    render
-
-    expect(rendered).to have_link "Back to Users", href: root_path
+    expect(rendered).to have_link "Home", href: root_path
   end
 end
