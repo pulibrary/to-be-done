@@ -103,7 +103,9 @@ jobs:
       - run:
           name: Run rspec
           command: bundle exec rspec spec/
-
+      - store_artifacts:
+          path: ~/to-be-done/coverage
+          destination: coverage
   rubocop:
     executor: to-be-done-executor
     steps:

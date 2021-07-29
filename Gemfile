@@ -69,3 +69,6 @@ end
 
 # Add devise for user and admin account management
 gem 'devise'
+
+# Add simplecov
+gem 'simplecov', require: false, group: :test
