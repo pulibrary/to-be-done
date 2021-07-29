@@ -1,0 +1,124 @@
+---
+version: 2.1
+executors:
+  to-be-done-executor:
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers
+        environment:
+          BUNDLER_VERSION: 2.2.6
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: to-be-done
+          RAILS_ENV: test
+      - image: postgres:10
+        environment:
+          POSTGRES_USER: to-be-done
+          POSTGRES_DB: to_be_done_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+    working_directory: ~/to-be-done
+
+commands:
+  setup-bundler:
+    description: "Install correct version of bundler and load from cache or bundle install"
+    steps:
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - to-be-done-bundle-v3-{{ checksum "Gemfile.lock" }}
+            - to-be-done-bundle-v3-
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      # Store bundle cache
+      - save_cache:
+          key: to-be-done-bundle-v3-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+jobs:
+  build:
+    executor: to-be-done-executor
+    steps:
+      - attach_workspace:
+          at: '~/to-be-done'
+      - checkout
+      - setup-bundler
+
+      # Only necessary if app uses webpacker or yarn in some other way
+      - restore_cache:
+          keys:
+            - to-be-done-yarn-v1-{{ checksum "yarn.lock" }}
+            - to-be-done-yarn-v1-
+
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      # Store yarn / webpacker cache
+      - save_cache:
+          key: to-be-done-yarn-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - persist_to_workspace:
+          root: '~/to-be-done'
+          paths: '*'
+
+  test:
+    executor: to-be-done-executor
+    steps:
+      - attach_workspace:
+          at: '~/to-be-done'
+      - setup-bundler
+
+      # ensure we have psql which we need for db:schema:load
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y postgresql-client || true
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: |
+            bin/rails db:create
+            bin/rails db:structure:load
+      # Run rspec
+      - run:
+          name: Run rspec
+          command: bundle exec rspec spec/
+
+  rubocop:
+    executor: to-be-done-executor
+    steps:
+      - attach_workspace:
+          at: '~/to-be-done'
+      - setup-bundler
+      - run: bundle exec rubocop --disable-pending-cops
+
+workflows:
+  build_accept:
+    jobs:
+      - build
+      # - rubocop:
+      #    requires:
+      #     - build
+      - test:
+         requires:
+          - build
