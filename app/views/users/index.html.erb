@@ -1,13 +1,9 @@
-<h1>Users</h1>
+<nav>
+  <%= link_to "Home", root_path %>
+  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+</nav>
 
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user_path(user) do %>
-        <%= user.full_name %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to "Add New User", new_user_path %>
+<main>
+  <h1><%= "Thanya"%>'s TBD</h1>
+  <p>Here you can add everything you want to read, watch, and listen to.</p>
+</main>
