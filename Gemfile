@@ -68,3 +68,6 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'rails-controller-testing'
 end
+
+# Add devise for user and admin account management
+gem 'devise'
