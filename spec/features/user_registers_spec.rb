@@ -1,6 +1,7 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
-RSpec.feature "User registers", :type => :feature do
+RSpec.feature "User registers", type: :feature do
   scenario "with valid details" do
     visit "/"
     click_link "Sign Up"
@@ -20,7 +21,7 @@ RSpec.feature "User registers", :type => :feature do
   end
 
   context "with invalid details" do
-    before(:each) do
+    before do
       visit new_user_registration_path
     end
 

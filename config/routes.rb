@@ -1,16 +1,17 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   devise_for :users,
     path_names: {
-      sign_in: 'login',
-      sign_out: 'logout',
-      sign_up: 'signup'
+      sign_in: "login",
+      sign_out: "logout",
+      sign_up: "signup"
     }
 
   authenticated :user do
-    root to: 'users#index', as: :authenticated_root
+    root to: "users#index", as: :authenticated_root
   end
-  
+
   unauthenticated :user do
-    root to: 'home#index'
+    root to: "home#index"
   end
 end

@@ -1,0 +1,39 @@
+inherit_gem:
+  bixby: bixby_default.yml
+
+AllCops:
+  TargetRubyVersion: 2.6
+  DisabledByDefault: true
+  DisplayCopNames: true
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - "bin/*"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/views/**/*"
+
+RSpec/ExampleLength:
+  Exclude:
+    - "spec/features/**/*"
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/features/**/*"
+    - "config/environments/**/*"
