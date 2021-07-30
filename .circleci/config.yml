@@ -118,9 +118,9 @@ workflows:
   build_accept:
     jobs:
       - build
-      # - rubocop:
-      #    requires:
-      #     - build
+      - rubocop:
+         requires:
+          - build
       - test:
          requires:
           - build
