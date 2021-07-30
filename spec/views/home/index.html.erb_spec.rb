@@ -1,4 +1,5 @@
-require 'rails_helper'
+# frozen_string_literal: true
+require "rails_helper"
 
 RSpec.describe "home/index.html.erb", type: :view do
   it "has link to sign up" do
