@@ -7,12 +7,7 @@ RSpec.feature "User registers", type: :feature do
     click_link "Sign Up"
     expect(current_path).to eq(new_user_registration_path)
 
-    fill_in "First name", with: "Harry"
-    fill_in "Last name", with: "Potter"
-    fill_in "Email", with: "hp@pottermore.com"
-    fill_in "Password", with: "ginny4eva"
-    fill_in "Password confirmation", with: "ginny4eva"
-    click_button "Sign up"
+    sign_up "Harry", "Potter", "hp@pottermore.com", "ginny4eva", "ginny4eva"
 
     expect(current_path).to eq "/"
     expect(page).to have_content "signed up successfully"
@@ -39,36 +34,32 @@ RSpec.feature "User registers", type: :feature do
     end
 
     scenario "invalid email" do
-      fill_in "First name", with: "Harry"
-      fill_in "Last name", with: "Potter"
-      fill_in "Email", with: "hppottermore.com"
-      fill_in "Password", with: "ginny4eva"
-      fill_in "Password confirmation", with: "ginny4eva"
-      click_button "Sign up"
+      sign_up "Harry", "Potter", "hppottermore.com", "ginny4eva", "ginny4eva"
 
       expect(page).to have_content "Email is invalid"
     end
 
     scenario "incorrect password confirmation" do
-      fill_in "First name", with: "Harry"
-      fill_in "Last name", with: "Potter"
-      fill_in "Email", with: "hp@pottermore.com"
-      fill_in "Password", with: "ginny4eva"
-      fill_in "Password confirmation", with: "ginnyeva"
-      click_button "Sign up"
+      sign_up "Harry", "Potter", "hp@pottermore.com", "ginny4eva", "ginnyeva"
 
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
 
     scenario "too short password" do
-      fill_in "First name", with: "Harry"
-      fill_in "Last name", with: "Potter"
-      fill_in "Email", with: "hp@pottermore.com"
-      fill_in "Password", with: "ginny"
-      fill_in "Password confirmation", with: "ginny"
-      click_button "Sign up"
+      sign_up "Harry", "Potter", "hp@pottermore.com", "ginny", "ginny"
 
       expect(page).to have_content "Password is too short (minimum is 6 characters)"
     end
+  end
+
+  private
+
+  def sign_up(first_name, last_name, email, password, password_confirm)
+    fill_in "First name", with: first_name
+    fill_in "Last name", with: last_name
+    fill_in "Email", with: email
+    fill_in "Password", with: password
+    fill_in "Password confirmation", with: password_confirm
+    click_button "Sign up"
   end
 end
