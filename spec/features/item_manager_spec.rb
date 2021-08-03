@@ -15,7 +15,7 @@ RSpec.feature "Item manager", type: :feature do
       sign_in user
       visit "/"
 
-      expect(page).to have_content "Ron's"
+      expect(page).to have_content "Ron's tbd"
       expect(page).to have_content "+ Add Item"
     end
   end
