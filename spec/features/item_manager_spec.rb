@@ -14,9 +14,10 @@ RSpec.feature "Item manager", type: :feature do
     scenario "of type book" do
       sign_in user
       visit "/"
-
       expect(page).to have_content "Ron's tbd"
-      expect(page).to have_content "+ Add Item"
+
+      click_link "+ Add Item"
+      expect(current_path).to eq root_path
     end
   end
 end
