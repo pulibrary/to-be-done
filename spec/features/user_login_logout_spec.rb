@@ -2,13 +2,15 @@
 require "rails_helper"
 
 RSpec.feature "User logs in", type: :feature do
-  let(:user) { User.create(
-    first_name: "Ron",
-    last_name: "Weasley",
-    email: "ron@weasley.com",
-    password: "hermione123",
-    password_confirmation: "hermione123"
-  )}
+  let(:user) do
+    User.create(
+      first_name: "Ron",
+      last_name: "Weasley",
+      email: "ron@weasley.com",
+      password: "hermione123",
+      password_confirmation: "hermione123"
+    )
+  end
 
   context "with valid details" do
     scenario "belonging to registered user" do
@@ -58,8 +60,8 @@ RSpec.feature "User logs in", type: :feature do
   private
 
   def log_in(email, password)
-      fill_in "Email", with: email
-      fill_in "Password", with: password
-      click_button "Log in"
+    fill_in "Email", with: email
+    fill_in "Password", with: password
+    click_button "Log in"
   end
 end
