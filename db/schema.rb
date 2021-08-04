@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_152918) do
     t.string "status"
     t.string "link"
     t.integer "rating"
-    t.text "review"
+    t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_items_on_user_id"

@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.string :status
       t.string :link
       t.integer :rating
-      t.text :review
+      t.text :notes
 
       t.timestamps
     end
