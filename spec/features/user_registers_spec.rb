@@ -11,6 +11,7 @@ RSpec.feature "User registers", type: :feature do
 
     expect(current_path).to eq "/"
     expect(page).to have_content "signed up successfully"
+    expect(page).to have_content "Harry's tbd"
     expect(User.last.first_name).to eq "Harry"
     expect(User.last.last_name).to eq "Potter"
   end
@@ -20,7 +21,7 @@ RSpec.feature "User registers", type: :feature do
       visit new_user_registration_path
     end
 
-    scenario "blank fields" do
+    scenario "like blank fields" do
       expect(page).to have_field("Email", with: "", type: "email")
       expect(find_field("Password", type: "password").value).to be_nil
       expect(find_field("Password confirmation", type: "password").value).to be_nil
@@ -33,19 +34,19 @@ RSpec.feature "User registers", type: :feature do
       expect(page).to have_content "Last name can't be blank"
     end
 
-    scenario "invalid email" do
+    scenario "like invalid email" do
       sign_up "Harry", "Potter", "hppottermore.com", "ginny4eva", "ginny4eva"
 
       expect(page).to have_content "Email is invalid"
     end
 
-    scenario "incorrect password confirmation" do
+    scenario "like incorrect password confirmation" do
       sign_up "Harry", "Potter", "hp@pottermore.com", "ginny4eva", "ginnyeva"
 
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
 
-    scenario "too short password" do
+    scenario "like too short of a password" do
       sign_up "Harry", "Potter", "hp@pottermore.com", "ginny", "ginny"
 
       expect(page).to have_content "Password is too short (minimum is 6 characters)"
