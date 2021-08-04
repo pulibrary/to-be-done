@@ -2,11 +2,19 @@
 require "rails_helper"
 
 RSpec.describe "Users", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/"
+  let(:user) { User.create(
+    first_name: "Ron",
+    last_name: "Weasley",
+    email: "ron@weasley.com",
+    password: "hermione123",
+    password_confirmation: "hermione123"
+  )}
 
-      expect(response).to have_http_status :success
+  describe "GET /show" do
+    it "display's user's full name" do
+      get user_path(user)
+
+      expect(response.body).to have_content "Ron Weasley"
     end
   end
 end

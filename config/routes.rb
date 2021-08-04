@@ -8,12 +8,14 @@ Rails.application.routes.draw do
     }
 
   authenticated :user do
-    root to: "users#index", as: :authenticated_root
+    root to: "items#index", as: :authenticated_root
   end
 
   unauthenticated :user do
     root to: "home#index"
   end
 
-  resources :items
+  resources :users, only: [:show] do
+    resources :items
+  end
 end

@@ -4,7 +4,7 @@ require "rails_helper"
 RSpec.describe "Items", type: :request do
   describe "GET /index" do
     it "returns http success" do
-      get "/items/"
+      get "/"
 
       expect(response).to have_http_status :success
     end
