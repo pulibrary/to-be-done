@@ -14,7 +14,7 @@ RSpec.describe "Items", type: :request do
   end
 
   describe "GET /new" do
-    it "returns http success" do
+    it "renders new template" do
       get new_user_item_path(user)
 
       expect(response).to render_template :new
