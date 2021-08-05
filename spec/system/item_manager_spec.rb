@@ -11,7 +11,7 @@ RSpec.describe "Item manager", type: :system do
 
       click_link "+ Add Item"
 
-      expect(current_path).to eq root_path
+      expect(current_path).to eq new_user_item_path(user)
     end
   end
 end
