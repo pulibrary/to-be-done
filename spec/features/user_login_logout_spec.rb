@@ -2,15 +2,7 @@
 require "rails_helper"
 
 RSpec.feature "User logs in", type: :feature do
-  let(:user) do
-    User.create(
-      first_name: "Ron",
-      last_name: "Weasley",
-      email: "ron@weasley.com",
-      password: "hermione123",
-      password_confirmation: "hermione123"
-    )
-  end
+  let(:returning_user) { create(:user) }
 
   context "with valid details" do
     scenario "belonging to registered user" do
@@ -18,7 +10,7 @@ RSpec.feature "User logs in", type: :feature do
       click_link "Log In"
       expect(current_path).to eq(new_user_session_path)
 
-      log_in user.email, user.password
+      log_in returning_user.email, returning_user.password
       expect(page).to have_content("Ron's tbd")
       expect(current_path).to eq(root_path)
 
@@ -43,14 +35,14 @@ RSpec.feature "User logs in", type: :feature do
     end
 
     scenario "like wrong email" do
-      log_in "ronweasley.com", user.password
+      log_in "ronweasley.com", returning_user.password
 
       expect(page).to have_content("Invalid Email or password")
       expect(current_path).to eq(new_user_session_path)
     end
 
     scenario "like wrong password" do
-      log_in user.email, "Hermione12"
+      log_in returning_user.email, "Hermione12"
 
       expect(page).to have_content("Invalid Email or password")
       expect(current_path).to eq(new_user_session_path)
