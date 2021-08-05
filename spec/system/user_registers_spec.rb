@@ -17,9 +17,7 @@ RSpec.describe "User registers", type: :system do
   end
 
   context "with invalid details" do
-    before do
-      visit new_user_registration_path
-    end
+    before { visit new_user_registration_path }
 
     scenario "like blank fields" do
       expect(page).to have_field("Email", with: "", type: "email")
