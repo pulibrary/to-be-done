@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "rails_helper"
 
-RSpec.feature "User logs in", type: :feature do
+RSpec.describe "User logs in", type: :system do
   let(:returning_user) { create(:user) }
 
   context "with valid details" do
@@ -11,7 +11,7 @@ RSpec.feature "User logs in", type: :feature do
       expect(current_path).to eq(new_user_session_path)
 
       log_in returning_user.email, returning_user.password
-      expect(page).to have_content("Ron's tbd")
+      expect(page).to have_content "#{returning_user.first_name}'s tbd"
       expect(current_path).to eq(root_path)
 
       click_link "Logout"

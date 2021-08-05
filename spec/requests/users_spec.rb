@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :request do
       user = create(:user)
       get user_path(user)
 
-      expect(response.body).to have_content "Ron Weasley"
+      expect(response.body).to have_content user.full_name
     end
   end
 end
