@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_152918) do
+ActiveRecord::Schema.define(version: 2021_08_04_203248) do
 
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_08_03_152918) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "type"
+    t.string "creator"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
