@@ -16,9 +16,6 @@ AllCops:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-
 Style/GuardClause:
   Enabled: false
 
@@ -31,9 +28,9 @@ RSpec/DescribeClass:
 
 RSpec/ExampleLength:
   Exclude:
-    - "spec/features/**/*"
+    - "spec/system/**/*"
 
 Metrics/BlockLength:
   Exclude:
-    - "spec/features/**/*"
+    - "spec/system/**/*"
     - "config/environments/**/*"

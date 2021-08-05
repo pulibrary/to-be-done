@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "rails_helper"
 
-RSpec.describe "Homes", type: :request do
+RSpec.describe "Items", type: :request do
   describe "GET /index" do
     it "returns http success" do
       get "/"
