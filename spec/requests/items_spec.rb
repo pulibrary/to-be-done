@@ -2,19 +2,22 @@
 require "rails_helper"
 
 RSpec.describe "Items", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/"
+  let(:user) { create(:user) }
+  before { sign_in user }
 
-      expect(response).to have_http_status :success
+  describe "GET /index" do
+    it "renders index template" do
+      get user_items_path(user)
+
+      expect(response).to render_template :index
     end
   end
 
   describe "GET /new" do
     it "returns http success" do
-      get "/"
+      get new_user_item_path(user)
 
-      expect(response).to have_http_status :success
+      expect(response).to render_template :new
     end
   end
 end

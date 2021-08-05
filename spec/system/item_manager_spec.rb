@@ -7,7 +7,6 @@ RSpec.describe "Item manager", type: :system do
       user = create(:user)
       sign_in user
       visit "/"
-      expect(page).to have_content "#{user.first_name}'s tbd"
 
       click_link "+ Add Item"
 
