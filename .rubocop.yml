@@ -29,8 +29,10 @@ RSpec/DescribeClass:
 RSpec/ExampleLength:
   Exclude:
     - "spec/system/**/*"
+    - "spec/requests/**/*"
 
 Metrics/BlockLength:
   Exclude:
     - "spec/system/**/*"
+    - "spec/requests/**/*"
     - "config/environments/**/*"

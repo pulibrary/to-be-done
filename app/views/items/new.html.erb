@@ -1,6 +1,6 @@
 <h1>New Item</h1>
 
-<%= form_with model: @item, url: user_items_path(current_user) do |form| %>
+<%= form_with model: [ current_user, current_user.items.build ] do |form| %>
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
@@ -15,10 +15,13 @@
   </div>
   <div>
     <%= form.label :link %><br>
-    <%= form.text_field :link %>
+    <%= form.url_field :link %>
   </div>
   <div>
     <%= form.label :notes %><br>
     <%= form.text_area :notes %>
+  </div>
+  <div>
+    <%= form.submit %>
   </div>
 <% end %>
