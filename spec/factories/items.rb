@@ -2,7 +2,7 @@
 FactoryBot.define do
   factory :item do
     name { "Shadow and Bone" }
-    status { "Not Started" }
+    status { "Ready to Start" }
     association :user
 
     factory :book do

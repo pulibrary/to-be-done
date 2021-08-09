@@ -35,4 +35,5 @@ Metrics/BlockLength:
   Exclude:
     - "spec/system/**/*"
     - "spec/requests/**/*"
+    - "spec/support/**/*"
     - "config/environments/**/*"
