@@ -2,5 +2,5 @@
 require "rails_helper"
 
 RSpec.describe "items/new.html.erb", type: :view do
-  pending "displays new item form"
+  pending "changes title depending on item type"
 end

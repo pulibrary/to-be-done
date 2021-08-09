@@ -16,10 +16,30 @@ class ItemsController < ApplicationController
     @item = current_user.items.build(item_params)
 
     if @item.save
-      redirect_to user_item_path(current_user, @item), notice: "Item was successfully created."
+      redirect_to user_item_path(current_user, @item)
     else
       render :new
     end
+  end
+
+  def edit
+    @item = current_user.items.find(params[:id])
+  end
+
+  def update
+    @item = current_user.items.find(params[:id])
+
+    if @item.update(item_params)
+      redirect_to user_item_path(current_user, @item)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @item = current_user.items.find(params[:id])
+    @item.destroy
+    redirect_to user_items_path
   end
 
   private

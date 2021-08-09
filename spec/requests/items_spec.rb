@@ -27,6 +27,7 @@ RSpec.describe "Items", type: :request do
       get new_user_item_path(user)
 
       expect(response).to render_template :new
+      expect(response).to render_template(partial: "_form")
     end
   end
 
@@ -49,10 +50,11 @@ RSpec.describe "Items", type: :request do
       get edit_user_item_path(user, item)
 
       expect(response).to render_template :edit
+      expect(response).to render_template(partial: "_form")
     end
   end
 
-  describe "PUT /create" do
+  describe "PUT /update" do
     it "redirects to item's page on successful item update" do
       put user_item_path(user, item), params: { item: attributes_for(:item, status: "In Progress") }
 
@@ -63,6 +65,15 @@ RSpec.describe "Items", type: :request do
       put user_item_path(user, item), params: { item: attributes_for(:item, status: "") }
 
       expect(response).to render_template :edit
+    end
+  end
+
+  describe "DELETE /destroy" do
+    it "redirects home on successful item deletion" do
+      delete user_item_path(user, item)
+
+      expect(user.items).not_to include item
+      expect(response).to redirect_to user_items_path(user)
     end
   end
 end

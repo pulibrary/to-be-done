@@ -1,0 +1,25 @@
+<%= form_with model: [ current_user, current_user.items.build ] do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :author %><br>
+    <%= form.text_field :author %>
+  </div>
+  <div>
+    <%= form.label :status %><br>
+    <%= form.text_field :status %>
+  </div>
+  <div>
+    <%= form.label :link %><br>
+    <%= form.url_field :link %>
+  </div>
+  <div>
+    <%= form.label :notes %><br>
+    <%= form.text_area :notes %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
