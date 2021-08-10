@@ -12,7 +12,13 @@
   <section>
     <h2>Books</h2>
     <div>
-      <%= link_to "+ Add Item", new_user_item_path(current_user) %>
+      <% current_user.items.each do |item| %>
+        <%= render "item", item: item %>
+      <% end %>
+    </div>
+    <br />
+    <div>
+      <%= link_to "+ Add Item", new_user_book_path(current_user) %>
     </div>
   </section>
   <section>

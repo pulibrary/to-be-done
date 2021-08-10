@@ -1,4 +1,4 @@
-<%= form_with model: [ current_user, current_user.items.build ] do |form| %>
+<%= form_with model: [ current_user, @item ] do |form| %>
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %>

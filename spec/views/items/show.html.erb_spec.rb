@@ -2,13 +2,16 @@
 require "rails_helper"
 
 RSpec.describe "items/show.html.erb", type: :view do
+  let(:user) { create(:user) }
+  before { sign_in user }
+
   it "displays item's details" do
-    item = create(:item)
-    assign(:item, item)
+    book = create(:book, user: user)
+    assign(:item, book)
 
     render
 
-    expect(rendered).to have_content item.name
-    expect(rendered).to have_content item.status
+    expect(rendered).to have_content book.name
+    expect(rendered).to have_content book.status
   end
 end

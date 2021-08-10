@@ -1,3 +1,5 @@
 <h1><%= @item.name %></h1>
 <p><%= @item.status %></p>
-
+<%= link_to "Edit", edit_user_book_path(current_user, @item) %>
+<%= link_to "Destroy", user_book_path(current_user, @item), method: :delete,
+    data: { confirm: "Are you sure?" } %>

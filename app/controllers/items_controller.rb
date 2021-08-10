@@ -2,21 +2,24 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    @items = current_user.items
+  end
 
   def show
     @item = current_user.items.find(params[:id])
   end
 
   def new
-    @item = current_user.items.build
+    @item = item_type.new(user: current_user)
   end
 
   def create
-    @item = current_user.items.build(item_params)
+    @item = item_type.new(item_params)
+    @item.user = current_user
 
     if @item.save
-      redirect_to user_item_path(current_user, @item)
+      redirect_to polymorphic_path([current_user, @item])
     else
       render :new
     end
@@ -30,7 +33,7 @@ class ItemsController < ApplicationController
     @item = current_user.items.find(params[:id])
 
     if @item.update(item_params)
-      redirect_to user_item_path(current_user, @item)
+      redirect_to polymorphic_path([current_user, @item])
     else
       render :edit
     end
@@ -39,12 +42,25 @@ class ItemsController < ApplicationController
   def destroy
     @item = current_user.items.find(params[:id])
     @item.destroy
-    redirect_to user_items_path
+    redirect_to polymorphic_path([current_user, @item])
   end
 
   private
 
+  def item_types
+    ["Book", "TvShow", "Movie", "Music"]
+  end
+
+  def item_type
+    params[:type].constantize if params[:type].in? item_types
+  end
+
   def item_params
-    params.require(:item).permit(:name, :author, :status, :link, :notes)
+    case params[:type]
+    when "Book"
+      params.require(:book).permit(:name, :author, :status, :link, :notes)
+    else
+      params.require(:item).permit(:name, :author, :artist, :status, :link, :notes)
+    end
   end
 end
