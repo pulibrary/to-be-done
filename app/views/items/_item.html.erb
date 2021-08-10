@@ -1,5 +1,5 @@
 <div>
-  <h3><%= link_to item.name, user_item_path(current_user, item) %></h3>
+  <h3><%= link_to item.name, [current_user, item] %></h3>
 
   <% if item.type == "Book" %>
     <p><%= item.author %></p>
@@ -11,8 +11,12 @@
     <p><%= item.notes %></p>
   <% end %>
 
-  <div><%= item.status %></div>
+  <div>
+    <%= item.status %>
+  </div>
 
-  <p><%= link_to "Edit", edit_user_item_path(current_user, item) %></p>
+  <p>
+    <%= link_to "Edit", [:edit, current_user, item] %>
+  </p>
 </div>
 <hr />

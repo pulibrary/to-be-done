@@ -6,19 +6,31 @@ RSpec.describe "Items", type: :request do
   let(:item) { create(:item, user: user) }
   before { sign_in user }
 
-  describe "GET /index" do
-    it "renders :index template" do
-      get user_items_path(user)
+  describe "GET /home" do
+    it "renders :home template" do
+      get root_path
 
-      expect(response).to render_template :index
+      expect(response).to render_template :home
+    end
+  end
+
+  describe "GET /index" do
+    context "renders :index template for item" do
+      it "of type book" do
+        get polymorphic_path([user, :books])
+
+        expect(response).to render_template :index
+      end
     end
   end
 
   describe "GET /show" do
-    it "renders :show template" do
-      get polymorphic_path([user, item])
+    context "renders :show tempalte for item" do
+      it "of type book" do
+        get user_book_path(user, create(:book, user: user))
 
-      expect(response).to render_template :show
+        expect(response).to render_template :show
+      end
     end
   end
 
@@ -37,13 +49,13 @@ RSpec.describe "Items", type: :request do
 
   describe "POST /create" do
     it "redirects to item's page on successful item creation" do
-      post user_books_path(user), params: { book: attributes_for(:book) }
+      post user_books_path(user), params: { item: attributes_for(:book) }
 
       expect(response).to redirect_to user_book_path(user, user.items.last)
     end
 
     it "re-renders :new template on unsuccessful item creation" do
-      post user_books_path(user), params: { book: attributes_for(:book, status: "") }
+      post user_books_path(user), params: { item: attributes_for(:book, status: "") }
 
       expect(response).to render_template :new
     end
@@ -62,26 +74,28 @@ RSpec.describe "Items", type: :request do
   describe "PUT /update" do
     it "redirects to item's page on successful item update" do
       book = create(:book, user: user)
-      put user_book_path(user, book), params: { book: attributes_for(:book, status: "In Progress") }
+      put user_book_path(user, book), params: { item: attributes_for(:book, status: "In Progress") }
 
-      expect(response).to redirect_to user_item_path(user, user.items.last)
+      expect(response).to redirect_to user_book_path(user, user.items.last)
     end
 
     it "re-renders :edit template on unsuccessful item update" do
       book = create(:book, user: user)
-      put user_book_path(user, book), params: { book: attributes_for(:book, status: "") }
+      put user_book_path(user, book), params: { item: attributes_for(:book, status: "") }
 
       expect(response).to render_template :edit
     end
   end
 
   describe "DELETE /destroy" do
-    it "redirects home on successful item deletion" do
-      book = create(:book, user: user)
-      delete user_book_path(user, book)
+    context "redirects home on successful deletion" do
+      it "of book type" do
+        book = create(:book, user: user)
+        delete user_book_path(user, book)
 
-      expect(user.items).not_to include book
-      expect(response).to redirect_to user_items_path(user)
+        expect(user.items).not_to include book
+        expect(response).to redirect_to user_books_path(user)
+      end
     end
   end
 end

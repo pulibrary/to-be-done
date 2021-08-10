@@ -2,8 +2,13 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
 
+  def home; end
+
   def index
-    @items = current_user.items
+    type = params[:type]
+    @items = current_user.items.where(type: type)
+    @type = type.pluralize
+    @type = "TV Shows" if type == "TvShow"
   end
 
   def show
@@ -56,9 +61,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    case params[:type]
-    when "Book"
-      params.require(:book).permit(:name, :author, :status, :link, :notes)
-    end
+    params.require(:item).permit(:name, :author, :artist, :status, :link, :notes)
   end
 end

@@ -6,6 +6,7 @@ FactoryBot.define do
     association :user
 
     factory :book do
+      type { "Book" }
       author { "Leigh Bardugo" }
       link { "https://www.goodreads.com/book/show/10194157-shadow-and-bone" }
       notes { "A TV show adaptation recently came out on Netflix." }

@@ -6,11 +6,11 @@ RSpec.describe "items/edit.html.erb", type: :view do
   before { sign_in user }
 
   it "has link to destroy item" do
-    book = create(:book, user: user)
+    book = Book.create(attributes_for(:book, user_id: user.id))
     assign(:item, book)
 
     render
 
-    expect(rendered).to have_link "Destroy"
+    expect(rendered).to have_link "Destroy", href: user_book_path(user, book)
   end
 end

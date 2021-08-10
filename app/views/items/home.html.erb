@@ -1,0 +1,13 @@
+<%= render "nav" %>
+
+<header>
+  <h1><%= current_user.first_name %>'s tbd</h1>
+  <p>Here you can place everything that needs to be done, including reading, watching, or listening to something.</p>
+</header>
+
+<main>
+  <%= render "item_section", section_name: "Books", item_type: "Book" %>
+  <%# <%= render "item_section", section_name: "TV Shows", item_type: "TvShow" %>
+  <%# <%= render "item_section", section_name: "Movies", item_type: "Movie" %>
+  <%# <%= render "item_section", section_name: "Music", item_type: "Music" %>
+</main>

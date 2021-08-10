@@ -1,14 +1,25 @@
   <section>
-    <h2><%= section_name %></h2>
+    <h2>
+      <% if item_type == "TvShow" %>
+        <%= "TV Shows" %>
+      <% else %>
+        <%= item_type.pluralize %>
+      <% end %>
+    </h2>
 
     <div>
-      <% current_user.items.each do |item| %>
-        <%= render "item", item: item if item.type == item_type %>
+      <% current_user.items.where(type: item_type).each do |item| %>
+        <%= render "item", item: item %>
       <% end %>
     </div>
     <br />
 
     <div>
-      <%= link_to "+ Add #{item_type}", [:new, current_user, item_type.downcase.to_sym] %>
+      <% type = if item_type == "TvShow" %>
+        <% "TV Show" %>
+      <% else %>
+        <% item_type %>
+      <% end %>
+      <%= link_to "+ Add #{type}", [:new, current_user, item_type.downcase.to_sym] %>
     </div>
   </section>
