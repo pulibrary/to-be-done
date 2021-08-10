@@ -59,8 +59,6 @@ class ItemsController < ApplicationController
     case params[:type]
     when "Book"
       params.require(:book).permit(:name, :author, :status, :link, :notes)
-    else
-      params.require(:item).permit(:name, :author, :artist, :status, :link, :notes)
     end
   end
 end

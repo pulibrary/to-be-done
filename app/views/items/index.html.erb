@@ -1,7 +1,4 @@
-<nav>
-  <%= link_to "Home", root_path %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-</nav>
+<%= render "nav" %>
 
 <header>
   <h1><%= current_user.first_name %>'s tbd</h1>
@@ -9,28 +6,8 @@
 </header>
 
 <main>
-  <section>
-    <h2>Books</h2>
-    <div>
-      <% current_user.items.each do |item| %>
-        <%= render "item", item: item %>
-      <% end %>
-    </div>
-    <br />
-    <div>
-      <%= link_to "+ Add Item", new_user_book_path(current_user) %>
-    </div>
-  </section>
-  <section>
-    <h2>TV Shows</h2>
-    <div></div>
-  </section>
-  <section>
-    <h2>Movies</h2>
-    <div></div>
-  </section>
-  <section>
-    <h2>Music</h2>
-    <div></div>
-  </section>
+  <%= render "item_section", section_name: "Books", item_type: "Book" %>
+  <%# <%= render "item_section", section_name: "TV Shows", item_type: "TvShow" %>
+  <%# <%= render "item_section", section_name: "Movies", item_type: "Movie" %>
+  <%# <%= render "item_section", section_name: "Music", item_type: "Music" %>
 </main>

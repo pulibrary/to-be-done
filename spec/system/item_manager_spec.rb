@@ -8,12 +8,12 @@ RSpec.describe "Item manager", type: :system do
       sign_in user
       visit "/"
 
-      click_link "+ Add Item"
+      click_link "+ Add Book"
       expect(current_path).to eq new_user_book_path(user)
 
       fill_in "Name", with: "Shadow And Bone"
       fill_in "Author", with: "Leigh Bardugo"
-      fill_in "Status", with: "Ready to Start"
+      select "Ready to Start", from: "Status"
       fill_in "Link", with: "https://www.goodreads.com/book/show/10194157-shadow-and-bone"
       fill_in "Notes", with: "A TV show adaptation recently came out on Netflix."
       click_on "Create Book"

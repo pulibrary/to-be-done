@@ -1,0 +1,14 @@
+  <section>
+    <h2><%= section_name %></h2>
+
+    <div>
+      <% current_user.items.each do |item| %>
+        <%= render "item", item: item if item.type == item_type %>
+      <% end %>
+    </div>
+    <br />
+
+    <div>
+      <%= link_to "+ Add #{item_type}", [:new, current_user, item_type.downcase.to_sym] %>
+    </div>
+  </section>

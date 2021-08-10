@@ -1,2 +1,6 @@
+<%= render "nav" %>
+
 <h1>Edit <%= @item.type %></h1>
 <%= render 'items/form' %>
+<%= link_to "Destroy", [current_user, @item], method: :delete,
+    data: { confirm: "Are you sure?" } %>

@@ -9,7 +9,7 @@
   </div>
   <div>
     <%= form.label :status %><br>
-    <%= form.text_field :status %>
+    <%= form.select :status, ["Ready to Start", "In Progress", "Paused", "Finished"] %>
   </div>
   <div>
     <%= form.label :link %><br>
