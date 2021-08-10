@@ -6,7 +6,7 @@ RSpec.describe "items/show.html.erb", type: :view do
   before { sign_in user }
 
   it "displays item's details" do
-    book = Book.create(attributes_for(:book, user_id: user.id))
+    book = create(:book, user: user)
     assign(:item, book)
 
     render

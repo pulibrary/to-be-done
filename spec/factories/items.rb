@@ -5,11 +5,26 @@ FactoryBot.define do
     status { "Ready to Start" }
     association :user
 
-    factory :book do
-      type { "Book" }
+    factory :book, class: "Book" do
       author { "Leigh Bardugo" }
       link { "https://www.goodreads.com/book/show/10194157-shadow-and-bone" }
       notes { "A TV show adaptation recently came out on Netflix." }
+    end
+
+    factory :tv_show, class: "TvShow" do
+      status { "Finished" }
+      notes { "Adapted from the book of the same name." }
+    end
+
+    factory :movie, class: "Movie" do
+      name { "Howl's Moving Castle" }
+      status { "Paused" }
+    end
+
+    factory :music, class: "Music" do
+      name { "In The Heights Soundtrack" }
+      status { "In Progress" }
+      artist { "Various" }
     end
   end
 end

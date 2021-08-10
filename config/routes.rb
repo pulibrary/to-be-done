@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :books, controller: "items", type: "Book"
+    resources :tv_shows, controller: "items", type: "TvShow"
   end
 end

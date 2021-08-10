@@ -1,25 +1,20 @@
-  <section>
-    <h2>
-      <% if item_type == "TvShow" %>
-        <%= "TV Shows" %>
-      <% else %>
-        <%= item_type.pluralize %>
-      <% end %>
-    </h2>
+<section>
+  <h2>
+    <% if item_type == "TvShow" %>
+      <%= styled_type = "TV Shows" %>
+    <% else %>
+      <%= styled_type = item_type.titleize.pluralize %>
+    <% end %>
+  </h2>
 
-    <div>
-      <% current_user.items.where(type: item_type).each do |item| %>
-        <%= render "item", item: item %>
-      <% end %>
-    </div>
-    <br />
+  <div>
+    <% current_user.items.where(type: item_type).each do |item| %>
+      <%= render "item", item: item %>
+    <% end %>
+  </div>
+  <br />
 
-    <div>
-      <% type = if item_type == "TvShow" %>
-        <% "TV Show" %>
-      <% else %>
-        <% item_type %>
-      <% end %>
-      <%= link_to "+ Add #{type}", [:new, current_user, item_type.downcase.to_sym] %>
-    </div>
-  </section>
+  <div>
+    <%= link_to "+ Add #{styled_type.singularize}", [:new, current_user, item_type.underscore.to_sym] %>
+  </div>
+</section>
