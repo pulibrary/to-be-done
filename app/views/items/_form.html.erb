@@ -3,10 +3,18 @@
     <%= form.label :name %><br>
     <%= form.text_field :name %>
   </div>
-  <div>
-    <%= form.label :author %><br>
-    <%= form.text_field :author %>
-  </div>
+  <% if @item.type == "Book" %>
+    <div>
+      <%= form.label :author %><br>
+      <%= form.text_field :author %>
+    </div>
+  <% end %>
+  <% if @item.type == "Music" %>
+    <div>
+      <%= form.label :artist %><br>
+      <%= form.text_field :artist %>
+    </div>
+  <% end %>
   <div>
     <%= form.label :status %><br>
     <%= form.select :status, ["Ready to Start", "In Progress", "Paused", "Finished"] %>
@@ -20,6 +28,12 @@
     <%= form.text_area :notes %>
   </div>
   <div>
-    <%= form.submit %>
+    <% if @item.persisted? %>
+      <%= link_to "Destroy", [current_user, @item], method: :delete,
+        data: { confirm: "Are you sure?" } if @item.persisted? %>
+      <%= form.submit "Save" if @item.persisted? %>
+    <% else %>
+      <%= form.submit "Add" unless @item.persisted? %>
+    <% end %>
   </div>
 <% end %>

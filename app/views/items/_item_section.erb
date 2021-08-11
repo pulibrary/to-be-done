@@ -1,10 +1,6 @@
 <section>
   <h2>
-    <% if item_type == "TvShow" %>
-      <%= styled_type = "TV Shows" %>
-    <% else %>
-      <%= styled_type = item_type.titleize.pluralize %>
-    <% end %>
+    <%= format_type(item_type) %>
   </h2>
 
   <div>
@@ -15,6 +11,7 @@
   <br />
 
   <div>
-    <%= link_to "+ Add #{styled_type.singularize}", [:new, current_user, item_type.underscore.to_sym] %>
+    <%= link_to "+ Add #{format_type(item_type).singularize}",
+        [:new, current_user, item_type.underscore.to_sym] %>
   </div>
 </section>

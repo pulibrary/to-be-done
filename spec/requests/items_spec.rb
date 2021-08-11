@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe "Items", type: :request do
-  ITEM_TYPES = [:book, :tv_show].freeze
+  ITEM_TYPES = [:book, :tv_show, :movie, :music].freeze
 
   let(:user) { create(:user) }
   before do

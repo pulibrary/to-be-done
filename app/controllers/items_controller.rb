@@ -5,10 +5,8 @@ class ItemsController < ApplicationController
   def home; end
 
   def index
-    type = params[:type]
-    @items = current_user.items.where(type: type)
-    @type = type.pluralize
-    @type = "TV Shows" if type == "TvShow"
+    @type = params[:type]
+    @items = current_user.items.where(type: @type)
   end
 
   def show
