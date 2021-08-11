@@ -4,16 +4,16 @@ class ItemsController < ApplicationController
 
   def home
     @items = current_user.items
-    if params[:status].present? && params[:status].in?(item_statuses)
-      @items = @items.filter_by_status(params[:status])
+    if params[:status].present? && (params[:status] - item_statuses).empty?
+      @items = @items.where(status: params[:status])
     end
   end
 
   def index
     @type = params[:type]
     @items = current_user.items.where(type: @type)
-    if params[:status].present? && params[:status].in?(item_statuses)
-      @items = @items.filter_by_status(params[:status])
+    if params[:status].present? && (params[:status] - item_statuses).empty?
+      @items = @items.where(status: params[:status])
     end
   end
 

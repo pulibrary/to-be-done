@@ -5,8 +5,10 @@
   <%= link_to "Show All", [current_user, item_type.underscore.pluralize.to_sym] %>
 
   <div>
-    <% items.each do |item| %>
-      <%= render "item", item: item %>
+    <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+      <% items.where(status: status).each do |item| %>
+        <%= render "item", item: item %>
+      <% end %>
     <% end %>
   </div>
   <br />

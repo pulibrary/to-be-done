@@ -5,8 +5,13 @@
   <p>Here you can place everything that needs to be done, including reading, watching, or listening to something.</p>
 </header>
 
-<% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
-  <%= link_to status, authenticated_root_path(status: status) %>
+<%= form_with url: "/", method: :get do |form| %>
+  <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+    <%= check_box_tag "status[]", status, params[:status] && status.in?(params[:status]),
+        { id: status.parameterize } %>
+    <%= label_tag status.parameterize, status %>
+  <% end %>
+  <%= form.submit "Filter" %>
 <% end %>
 
 <main>
