@@ -20,6 +20,10 @@
     <%= form.select :status, ["Ready to Start", "In Progress", "Paused", "Finished"] %>
   </div>
   <div>
+    <%= form.label :rating %><br>
+    <%= form.select :rating, 1..5, { include_blank: true } %>
+  </div>
+  <div>
     <%= form.label :link %><br>
     <%= form.url_field :link %>
   </div>

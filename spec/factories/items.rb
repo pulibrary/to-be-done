@@ -13,6 +13,7 @@ FactoryBot.define do
 
     factory :tv_show, class: "TvShow" do
       status { "Finished" }
+      rating { 5 }
       notes { "Adapted from the book of the same name." }
     end
 
