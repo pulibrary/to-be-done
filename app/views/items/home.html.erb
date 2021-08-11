@@ -5,9 +5,12 @@
   <p>Here you can place everything that needs to be done, including reading, watching, or listening to something.</p>
 </header>
 
+<% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+  <%= link_to status, authenticated_root_path(status: status) %>
+<% end %>
+
 <main>
-  <%= render "item_section", item_type: "Book" %>
-  <%= render "item_section", item_type: "TvShow" %>
-  <%= render "item_section", item_type: "Movie" %>
-  <%= render "item_section", item_type: "Music" %>
+  <% ["Book", "TvShow", "Movie", "Music"].each do |type| %>
+    <%= render "item_section", items: @items.where(type: type), item_type: type %>
+  <% end %>
 </main>

@@ -2,11 +2,19 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
 
-  def home; end
+  def home
+    @items = current_user.items
+    if params[:status].present? && params[:status].in?(item_statuses)
+      @items = @items.filter_by_status(params[:status])
+    end
+  end
 
   def index
     @type = params[:type]
     @items = current_user.items.where(type: @type)
+    if params[:status].present? && params[:status].in?(item_statuses)
+      @items = @items.filter_by_status(params[:status])
+    end
   end
 
   def show
@@ -50,12 +58,16 @@ class ItemsController < ApplicationController
 
   private
 
+  def item_statuses
+    ["Ready to Start", "In Progress", "Paused", "Finished"]
+  end
+
   def item_types
     ["Book", "TvShow", "Movie", "Music"]
   end
 
   def item_type
-    params[:type].constantize if params[:type].in? item_types
+    params[:type].constantize if params[:type].in?(item_types)
   end
 
   def item_params

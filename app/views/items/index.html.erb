@@ -4,6 +4,10 @@
   <h1><%= format_type(@type) %></h1>
 </header>
 
+<% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+  <%= link_to status, polymorphic_path([current_user, @type.underscore.pluralize.to_sym], status: status) %>
+<% end %>
+
 <main>
   <% @items.each do |item| %>
     <%= render "item", item: item %>

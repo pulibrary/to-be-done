@@ -2,9 +2,10 @@
   <h2>
     <%= format_type(item_type) %>
   </h2>
+  <%= link_to "Show All", [current_user, item_type.underscore.pluralize.to_sym] %>
 
   <div>
-    <% current_user.items.where(type: item_type).each do |item| %>
+    <% items.each do |item| %>
       <%= render "item", item: item %>
     <% end %>
   </div>
