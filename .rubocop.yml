@@ -30,6 +30,7 @@ RSpec/ExampleLength:
   Exclude:
     - "spec/system/**/*"
     - "spec/requests/**/*"
+    - "spec/support/shared_examples/**/*"
 
 Metrics/BlockLength:
   Exclude:

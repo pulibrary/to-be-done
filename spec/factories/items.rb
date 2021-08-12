@@ -4,6 +4,7 @@ FactoryBot.define do
     name { "Shadow and Bone" }
     status { "Ready to Start" }
     association :user
+    notes { "" }
 
     factory :book, class: "Book" do
       author { "Leigh Bardugo" }

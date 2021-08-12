@@ -11,9 +11,7 @@
     <p><%= item.notes %></p>
   <% end %>
 
-  <div>
-    <%= item.status %>
-  </div>
+  <span><%= item.status %></span>
 
   <p>
     <%= link_to "Edit", [:edit, current_user, item] %>
