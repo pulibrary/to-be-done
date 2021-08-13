@@ -1,0 +1,43 @@
+<%= form_with model: [ current_user, @item ], scope: :item  do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+  <% if @item.type == "Book" %>
+    <div>
+      <%= form.label :author %><br>
+      <%= form.text_field :author %>
+    </div>
+  <% end %>
+  <% if @item.type == "Music" %>
+    <div>
+      <%= form.label :artist %><br>
+      <%= form.text_field :artist %>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, ["Ready to Start", "In Progress", "Paused", "Finished"] %>
+  </div>
+  <div>
+    <%= form.label :rating %><br>
+    <%= form.select :rating, 1..5, { include_blank: true } %>
+  </div>
+  <div>
+    <%= form.label :link %><br>
+    <%= form.url_field :link %>
+  </div>
+  <div>
+    <%= form.label :notes %><br>
+    <%= form.text_area :notes %>
+  </div>
+  <div>
+    <% if @item.persisted? %>
+      <%= link_to "Destroy", [current_user, @item], method: :delete,
+        data: { confirm: "Are you sure?" } if @item.persisted? %>
+      <%= form.submit "Save" if @item.persisted? %>
+    <% else %>
+      <%= form.submit "Add" unless @item.persisted? %>
+    <% end %>
+  </div>
+<% end %>

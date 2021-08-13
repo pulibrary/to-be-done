@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     }
 
   authenticated :user do
-    root to: "items#index", as: :authenticated_root
+    root to: "items#home", as: :authenticated_root
   end
 
   unauthenticated :user do
@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show] do
-    resources :items
+    resources :books, controller: "items", type: "Book"
+    resources :tv_shows, controller: "items", type: "TvShow"
+    resources :movies, controller: "items", type: "Movie"
+    resources :musics, controller: "items", type: "Music", path: "music"
   end
 end

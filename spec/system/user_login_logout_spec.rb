@@ -2,7 +2,7 @@
 require "rails_helper"
 
 RSpec.describe "User logs in", type: :system do
-  let(:returning_user) { create(:user) }
+  let(:user) { create(:user) }
 
   context "with valid details" do
     scenario "belonging to registered user" do
@@ -10,8 +10,8 @@ RSpec.describe "User logs in", type: :system do
       click_link "Log In"
       expect(current_path).to eq(new_user_session_path)
 
-      log_in returning_user.email, returning_user.password
-      expect(page).to have_content "#{returning_user.first_name}'s tbd"
+      log_in user.email, user.password
+      expect(page).to have_content "#{user.first_name}'s tbd"
       expect(current_path).to eq(root_path)
 
       click_link "Logout"
@@ -30,19 +30,17 @@ RSpec.describe "User logs in", type: :system do
   end
 
   context "with invalid details" do
-    before do
-      visit new_user_session_path
-    end
+    before { visit new_user_session_path }
 
     scenario "like wrong email" do
-      log_in "ronweasley.com", returning_user.password
+      log_in "ronweasley.com", user.password
 
       expect(page).to have_content("Invalid Email or password")
       expect(current_path).to eq(new_user_session_path)
     end
 
     scenario "like wrong password" do
-      log_in returning_user.email, "Hermione12"
+      log_in user.email, "Hermione12"
 
       expect(page).to have_content("Invalid Email or password")
       expect(current_path).to eq(new_user_session_path)

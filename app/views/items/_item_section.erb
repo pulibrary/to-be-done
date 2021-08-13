@@ -1,0 +1,20 @@
+<section>
+  <h2>
+    <%= format_type(item_type) %>
+  </h2>
+  <%= link_to "Show All", [current_user, item_type.underscore.pluralize.to_sym] %>
+
+  <div>
+    <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+      <% items.where(status: status).each do |item| %>
+        <%= render "item", item: item %>
+      <% end %>
+    <% end %>
+  </div>
+  <br />
+
+  <div>
+    <%= link_to "+ Add #{format_type(item_type).singularize}",
+        [:new, current_user, item_type.underscore.to_sym] %>
+  </div>
+</section>

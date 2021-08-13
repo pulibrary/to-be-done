@@ -7,19 +7,18 @@ RSpec.describe "User registers", type: :system do
     click_link "Sign Up"
     expect(current_path).to eq(new_user_registration_path)
 
-    sign_up "Harry", "Potter", "hp@pottermore.com", "ginny4eva", "ginny4eva"
+    user = build(:user)
+    sign_up user
 
     expect(current_path).to eq "/"
     expect(page).to have_content "signed up successfully"
-    expect(page).to have_content "Harry's tbd"
-    expect(User.last.first_name).to eq "Harry"
-    expect(User.last.last_name).to eq "Potter"
+    expect(page).to have_content "#{user.first_name}'s tbd"
+    expect(User.last.first_name).to eq user.first_name
+    expect(User.last.last_name).to eq user.last_name
   end
 
   context "with invalid details" do
-    before do
-      visit new_user_registration_path
-    end
+    before { visit new_user_registration_path }
 
     scenario "like blank fields" do
       expect(page).to have_field("Email", with: "", type: "email")
@@ -35,19 +34,19 @@ RSpec.describe "User registers", type: :system do
     end
 
     scenario "like invalid email" do
-      sign_up "Harry", "Potter", "hppottermore.com", "ginny4eva", "ginny4eva"
+      sign_up build(:user, email: "hppottermore.com")
 
       expect(page).to have_content "Email is invalid"
     end
 
     scenario "like incorrect password confirmation" do
-      sign_up "Harry", "Potter", "hp@pottermore.com", "ginny4eva", "ginnyeva"
+      sign_up build(:user, password_confirmation: "ginnyeva")
 
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
 
     scenario "like too short of a password" do
-      sign_up "Harry", "Potter", "hp@pottermore.com", "ginny", "ginny"
+      sign_up build(:user, password: "ginny", password_confirmation: "ginny")
 
       expect(page).to have_content "Password is too short (minimum is 6 characters)"
     end
@@ -55,12 +54,12 @@ RSpec.describe "User registers", type: :system do
 
   private
 
-  def sign_up(first_name, last_name, email, password, password_confirm)
-    fill_in "First name", with: first_name
-    fill_in "Last name", with: last_name
-    fill_in "Email", with: email
-    fill_in "Password", with: password
-    fill_in "Password confirmation", with: password_confirm
+  def sign_up(user)
+    fill_in "First name", with: user.first_name
+    fill_in "Last name", with: user.last_name
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    fill_in "Password confirmation", with: user.password_confirmation
     click_button "Sign up"
   end
 end

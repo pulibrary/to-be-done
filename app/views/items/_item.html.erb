@@ -1,0 +1,20 @@
+<div>
+  <h3><%= link_to item.name, [current_user, item] %></h3>
+
+  <% if item.type == "Book" %>
+    <p><%= item.author %></p>
+  <% elsif item.type == "Music" %>
+    <p><%= item.artist %></p>
+  <% end %>
+
+  <% unless item.notes.empty? %>
+    <p><%= item.notes %></p>
+  <% end %>
+
+  <span><%= item.status %></span>
+
+  <p>
+    <%= link_to "Edit", [:edit, current_user, item] %>
+  </p>
+</div>
+<hr />

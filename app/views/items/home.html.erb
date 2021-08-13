@@ -1,10 +1,11 @@
 <%= render "nav" %>
 
 <header>
-  <h1><%= format_type(@type) %></h1>
+  <h1><%= current_user.first_name %>'s tbd</h1>
+  <p>Here you can place everything that needs to be done, including reading, watching, or listening to something.</p>
 </header>
 
-<%= form_with url: polymorphic_path([current_user, @type.underscore.pluralize.to_sym]), method: :get do |form| %>
+<%= form_with url: "/", method: :get do |form| %>
   <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
     <%= check_box_tag "status[]", status, params[:status] && status.in?(params[:status]),
         { id: status.parameterize } %>
@@ -14,7 +15,7 @@
 <% end %>
 
 <main>
-  <% @items.each do |item| %>
-    <%= render "item", item: item %>
+  <% ["Book", "TvShow", "Movie", "Music"].each do |type| %>
+    <%= render "item_section", items: @items.where(type: type), item_type: type %>
   <% end %>
 </main>
