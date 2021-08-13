@@ -69,3 +69,6 @@ gem "devise"
 
 # Add simplecov
 gem "simplecov", require: false, group: :test
+
+# Add bootstrap
+gem "bootstrap", "~> 5.1.0"
