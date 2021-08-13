@@ -1,7 +1,20 @@
 <%= render "nav" %>
 
 <h1><%= @item.name %></h1>
-<p><%= @item.status %></p>
+<span><%= @item.status %></span>
+
+<% if @item.type == "Book" %>
+  <p><%= @item.author %></p>
+<% elsif @item.type == "Music" %>
+  <p><%= @item.artist %></p>
+<% end %>
+
+<% if !@item.notes || @item.notes.empty? %>
+  <p><%= "Nothing noteworthy here. Penny for your thoughts? 🪙" %></p>
+<% else %>
+  <p><%= @item.notes %></p>
+<% end %>
+
 <%= link_to "Edit", [:edit, current_user, @item] %>
 <%= link_to "Destroy", [current_user, @item], method: :delete,
     data: { confirm: "Are you sure?" } %>

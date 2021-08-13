@@ -7,7 +7,7 @@
     <p><%= item.artist %></p>
   <% end %>
 
-  <% unless item.notes.empty? %>
+  <% unless !item.notes || item.notes.empty? %>
     <p><%= item.notes %></p>
   <% end %>
 
