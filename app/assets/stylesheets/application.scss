@@ -12,28 +12,13 @@
  *
  */
 
-$cream: #F6F5F1;
-$eggplant: #4B418A;
-$tomato: #F9442C;
-$blueberry: #528FCB;
-$banana: #FFD600;
-$avocado: #15A2B4;
-$tangerine: #FFAD31;
-$pomegranate: #FFAEB0;
-$lavender: #9E93C8;
-
-$theme-colors: (
-  "primary": $eggplant,
-  "success": $avocado,
-  "danger": $tomato,
-  "warning": $banana,
-  "info": $blueberry,
-  "light": $cream
-);
-
+@import "variables";
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import "home";
+
+/* Place application-wide Bootstrap overrides here */
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Zilla Slab", "Times New Roman", serif; 
@@ -46,4 +31,9 @@ body {
 
 .btn {
   border-radius: 0;
+}
+
+.navbar-brand {
+  font-family: "Zilla Slab", "Times New Roman", serif; 
+  font-size: 2rem;
 }

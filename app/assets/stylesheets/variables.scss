@@ -1,0 +1,18 @@
+$cream: #F6F5F1;
+$eggplant: #4B418A;
+$tomato: #F9442C;
+$blueberry: #528FCB;
+$banana: #FFD600;
+$avocado: #15A2B4;
+$tangerine: #FFAD31;
+$pomegranate: #FFAEB0;
+$lavender: #9E93C8;
+
+$theme-colors: (
+  "primary": $eggplant,
+  "success": $avocado,
+  "danger": $tomato,
+  "warning": $tangerine,
+  "info": $blueberry,
+  "light": $cream
+);
