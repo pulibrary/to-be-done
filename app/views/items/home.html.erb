@@ -1,20 +1,13 @@
-<%= render "shared/nav" %>
-
-<header>
-  <h1><%= current_user.first_name %>'s tbd</h1>
-  <p>Here you can place everything that needs to be done, including reading, watching, or listening to something.</p>
+<header class="mx-2 mx-md-5 px-3 mt-5">
+  <h1 class="display-3 fw-bold text-primary"><%= current_user.first_name %>'s tbd</h1>
+  <p class="mb-4">
+    Here you can place everything that needs to be done.
+  </p>
+  <%= render "filters", url: "/" %>
 </header>
 
-<%= form_with url: "/", method: :get do |form| %>
-  <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
-    <%= check_box_tag "status[]", status, params[:status] && status.in?(params[:status]),
-        { id: status.parameterize } %>
-    <%= label_tag status.parameterize, status %>
-  <% end %>
-  <%= form.submit "Filter" %>
-<% end %>
 
-<main>
+<main class="mx-2 mx-md-5 px-3 mt-5">
   <% ["Book", "TvShow", "Movie", "Music"].each do |type| %>
     <%= render "item_section", items: @items.where(type: type), item_type: type %>
   <% end %>

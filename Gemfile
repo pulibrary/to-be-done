@@ -70,5 +70,6 @@ gem "devise"
 # Add simplecov
 gem "simplecov", require: false, group: :test
 
-# Add bootstrap
+# Add bootstrap and dependent packages
 gem "bootstrap", "~> 5.1.0"
+gem "jquery-rails"

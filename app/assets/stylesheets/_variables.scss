@@ -7,12 +7,19 @@ $avocado: #15A2B4;
 $tangerine: #FFAD31;
 $pomegranate: #FFAEB0;
 $lavender: #9E93C8;
+$secondary: rgba(196, 196, 196, 0.1);
 
 $theme-colors: (
   "primary": $eggplant,
+  "secondary": $secondary,
   "success": $avocado,
-  "danger": $tomato,
-  "warning": $tangerine,
   "info": $blueberry,
-  "light": $cream
+  "warning": $tangerine,
+  "danger": $tomato,
+  "light": $cream,
+  "rating": $banana,
+  "ready-to-start": $tomato,
+  "in-progress": $blueberry,
+  "paused": $tangerine,
+  "finished": $avocado
 );

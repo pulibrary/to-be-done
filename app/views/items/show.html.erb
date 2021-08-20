@@ -1,20 +1,37 @@
-<%= render "shared/nav" %>
+<main class="mx-2 mx-md-5 px-3 mt-5">
+  <h1 class="display-4 fw-bold"><%= @item.name %></h1>
 
-<h1><%= @item.name %></h1>
-<span><%= @item.status %></span>
+  <% if @item.type == "Book" %>
+    <p class="fs-4 fw-normal text-muted"><%= @item.author %></p>
+  <% elsif @item.type == "Music" %>
+    <p><%= @item.artist %></p>
+  <% end %>
 
-<% if @item.type == "Book" %>
-  <p><%= @item.author %></p>
-<% elsif @item.type == "Music" %>
-  <p><%= @item.artist %></p>
-<% end %>
+  <div class="mb-3">
+    <% if @item.rating %>
+      <%= render "rating", rating: @item.rating %>
+      <span class="align-middle mx-1">•</span>
+    <% end %>
+    <span class="badge rounded-pill bg-<%= @item.status.parameterize %> fw-normal">
+      <%= @item.status %>
+    </span>
+  </div>
 
-<% if !@item.notes || @item.notes.empty? %>
-  <p><%= "Nothing noteworthy here. Penny for your thoughts? 🪙" %></p>
-<% else %>
-  <p><%= @item.notes %></p>
-<% end %>
+  <% if @item.link %>
+    <a href=<%= @item.link %> target="_blank">
+      <small><%= @item.link %></small>
+    </a>
+  <% end %>
 
-<%= link_to "Edit", [:edit, current_user, @item] %>
-<%= link_to "Destroy", [current_user, @item], method: :delete,
-    data: { confirm: "Are you sure?" } %>
+  <% if !@item.notes || @item.notes.empty? %>
+    <p class="my-5"><%= "Nothing noteworthy here. Penny for your thoughts? 🪙" %></p>
+  <% else %>
+    <p class="my-5"><%= @item.notes %></p>
+  <% end %>
+
+  <div>
+    <%= link_to "Destroy", [current_user, @item], method: :delete,
+      data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary me-2" %>
+    <%= link_to "Edit", [:edit, current_user, @item], class: "btn btn-primary" %>
+  </div>
+</main>

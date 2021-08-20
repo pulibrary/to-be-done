@@ -1,0 +1,23 @@
+.btn {
+  border-radius: 0;
+}
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    &:hover {
+      color: white;
+    }
+
+    &:active {
+      color: white;
+    }
+  }
+
+  .btn-check:checked + .btn-outline-#{$color},
+  .btn-check:active + .btn-outline-#{$color},
+  .btn-outline-#{$color}:active,
+  .btn-outline-#{$color}.active,
+  .btn-outline-#{$color}.dropdown-toggle.show {
+    color: white;
+  }
+}

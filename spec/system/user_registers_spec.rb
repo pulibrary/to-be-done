@@ -25,7 +25,7 @@ RSpec.describe "User registers", type: :system do
       expect(find_field("Password", type: "password").value).to be_nil
       expect(find_field("Password confirmation", type: "password").value).to be_nil
 
-      click_button "Sign up"
+      click_button "Sign Up"
 
       expect(page).to have_content "Email can't be blank"
       expect(page).to have_content "Password can't be blank"
@@ -60,6 +60,6 @@ RSpec.describe "User registers", type: :system do
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     fill_in "Password confirmation", with: user.password_confirmation
-    click_button "Sign up"
+    click_button "Sign Up"
   end
 end

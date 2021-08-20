@@ -1,0 +1,38 @@
+.navbar-brand {
+  font-family: "Zilla Slab", "Times New Roman", serif;
+  font-size: 2rem;
+
+  span:after {
+    width: 0px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    transition: .25s ease-in-out;
+  }
+
+  span:nth-child(1):after {
+    content: 'o ';
+  }
+
+  span:nth-child(2):after {
+    content: 'e ';
+  }
+
+  span:nth-child(3):after {
+    content: 'one ';
+  }
+
+  &:hover, &:focus {
+    span:nth-child(1):after {
+      width: 1.5rem;
+    }
+
+    span:nth-child(2):after {
+      width: 1.5rem;
+    }
+
+    span:nth-child(3):after {
+      width: 3.25rem;
+    }
+  }
+}
