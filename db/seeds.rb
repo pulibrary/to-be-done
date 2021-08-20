@@ -7,9 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 books = Book.create([
   {
-    name: "Atomic Habits",
-    author: "James Clear",
-    status: "In Progress"
+    name: "Design Patterns",
+    author: "Christopher Lasater",
+    status: "Ready to Start",
+    link: "https://catalog.princeton.edu/catalog/99125141254206421"
   },
   {
     name: "The Hunger Games",
@@ -22,6 +23,18 @@ books = Book.create([
     name: "The Pragmatic Programmer",
     author: "Andy Hunt and Dave Thomas",
     status: "Ready to Start"
+  },
+  {
+    name: "Practical object-oriented design",
+    author: "Sandi Metz",
+    status: "Ready to Start",
+    link: "https://catalog.princeton.edu/catalog/99109036093506421"
+  },
+  {
+    name: "The Go programming language",
+    author: "Alan Donovan, Brian Kernighan",
+    status: "Ready to Start",
+    link: "https://catalog.princeton.edu/catalog/9996338243506421"
   }
 ])
 
@@ -33,10 +46,9 @@ tv_shows = TvShow.create([
     notes: "Returning in 2022"
   },
   {
-    name: "Rick and Morty",
+    name: "Brooklyn Nine-Nine",
     status: "In Progress",
-    link: "https://www.adultswim.com/videos/rick-and-morty",
-    notes: "Sundays at 11pm ET."
+    notes: "Thursdays at 8pm ET. Also premieres on Hulu."
   }
 ])
 
@@ -62,6 +74,7 @@ music = Music.create([
     name: "SOUR",
     artist: "Olivia Rodrigo",
     status: "Finished",
+    rating: "4",
     link: "https://open.spotify.com/album/6s84u2TUpR3wdUv4NgKA2j?autoplay=true"
   },
 ])
