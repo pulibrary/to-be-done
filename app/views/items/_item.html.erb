@@ -23,9 +23,9 @@
       <p class="card-text mb-2"><%= truncate(item.notes, length: 67) %></p>
     <% end %>
 
-    <span class="d-inline-block badge rounded-pill bg-<%= item.status.parameterize %> fw-normal mb-2">
+    <span class="badge rounded-pill bg-<%= item.status.parameterize %> fw-normal mb-2">
       <%= item.status %>
-    </span>
+    </span><br />
 
     <% if item.link %>
       <a href=<%= item.link %> target="_blank" class="">

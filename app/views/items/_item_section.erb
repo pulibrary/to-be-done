@@ -6,7 +6,7 @@
   </header>
 
   <div class="container-fluid px-0 overflow-scroll">
-    <div class="row flex-nowrap">
+    <div class="row ps-1 flex-nowrap">
       <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
         <% items.where(status: status).each do |item| %>
           <div class="col-auto px-2">
