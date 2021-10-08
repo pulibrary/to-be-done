@@ -1,0 +1,7 @@
+<% rating.times do %>
+  <i class="bi bi-star-fill text-rating align-text-bottom"></i>
+<% end %>
+<% (5 - rating).times do %>
+  <i class="bi bi-star text-secondary align-text-bottom"></i>
+<% end %>
+<span class="ms-1 text-muted align-middle"><%= rating %>/5</span>

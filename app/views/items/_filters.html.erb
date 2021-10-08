@@ -1,0 +1,8 @@
+<%= form_with url: url, method: :get, id: "filters" do |form| %>
+  <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+    <%= check_box_tag "status[]", status, params[:status] && status.in?(params[:status]),
+      { id: status.parameterize, class: "btn-check", onchange: "this.form.submit()" } %>
+    <%= label_tag status.parameterize, status, class: "btn btn-outline-#{status.parameterize} rounded-pill me-1" %>
+  <% end %>
+  <noscript><%= form.submit "Filter", class: "btn btn-link link-primary text-decoration-none" %></noscript>
+<% end %>

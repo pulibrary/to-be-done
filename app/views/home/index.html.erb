@@ -1,4 +1,14 @@
-<h1>Put everything you want to read, watch, and listen to in one place.</h1>
-
-<%= link_to "Sign Up", new_user_registration_path %>
-<%= link_to "Log In", new_user_session_path %>
+<main class="d-flex flex-column align-items-center">
+  <div class="bg-books">
+    <img src=<%= image_url("books.svg") %> alt="" />
+  </div>
+  <h1 class="hero display-3 fw-bold text-primary text-center mt-5 pt-5 mb-5 w-75">
+    Put everything you want to <span class="text-info">read</span>, 
+    <span class="text-danger">watch</span>, and 
+    <span class="text-warning">listen</span> to in one place.
+  </h1>
+  <div>
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary me-2" %>
+    <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-primary" %>
+  </div>
+</main>

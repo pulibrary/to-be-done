@@ -52,6 +52,6 @@ RSpec.describe "User logs in", type: :system do
   def log_in(email, password)
     fill_in "Email", with: email
     fill_in "Password", with: password
-    click_button "Log in"
+    click_button "Log In"
   end
 end

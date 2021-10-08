@@ -1,20 +1,25 @@
-<section>
-  <h2>
-    <%= format_type(item_type) %>
-  </h2>
-  <%= link_to "Show All", [current_user, item_type.underscore.pluralize.to_sym] %>
+<section class="mb-5">
+  <header class="d-flex justify-content-between mb-2">
+    <h2 class="display-5 fw-bold"><%= format_type(item_type) %></h2>
+    <%= link_to "Show All", [current_user, item_type.underscore.pluralize.to_sym],
+      class: "text-decoration-none link-primary h5 fw-normal" %>
+  </header>
 
-  <div>
-    <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
-      <% items.where(status: status).each do |item| %>
-        <%= render "item", item: item %>
+  <div class="container-fluid px-0 overflow-scroll">
+    <div class="row ps-1 flex-nowrap">
+      <% ["Ready to Start", "In Progress", "Paused", "Finished"].each do |status| %>
+        <% items.where(status: status).each do |item| %>
+          <div class="col-auto px-2">
+            <%= render "item", item: item %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <br />
 
-  <div>
-    <%= link_to "+ Add #{format_type(item_type).singularize}",
-        [:new, current_user, item_type.underscore.to_sym] %>
+      <div class="col-auto px-2">
+        <%= link_to "+ Add #{format_type(item_type).singularize}",
+          [:new, current_user, item_type.underscore.to_sym],
+          class: "card add-card link-primary h5 fw-normal" %>
+      </div>
+    </div>
   </div>
 </section>

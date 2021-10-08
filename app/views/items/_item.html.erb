@@ -1,20 +1,36 @@
-<div>
-  <h3><%= link_to item.name, [current_user, item] %></h3>
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h3 class="card-title">
+        <%= link_to item.name, [current_user, item], class: "text-decoration-none text-reset" %>
+      </h3>
+      <%= link_to [:edit, current_user, item] do %>
+        <i class="bi bi-pencil-fill" style="color: rgba(0, 0, 0, 0.55)"></i>
+      <% end %>
+    </div>
 
-  <% if item.type == "Book" %>
-    <p><%= item.author %></p>
-  <% elsif item.type == "Music" %>
-    <p><%= item.artist %></p>
-  <% end %>
+    <% if item.type == "Book" %>
+      <p class="card-subtitle text-muted mb-2"><%= item.author %></p>
+    <% elsif item.type == "Music" %>
+      <p class="card-subtitle text-muted mb-2"><%= item.artist %></p>
+    <% end %>
 
-  <% unless item.notes.empty? %>
-    <p><%= item.notes %></p>
-  <% end %>
+    <% if item.rating %>
+      <p class="mb-2"><%= render "rating", rating: item.rating %></p>
+    <% end %>
 
-  <span><%= item.status %></span>
+    <% unless !item.notes || item.notes.empty? %>
+      <p class="card-text mb-2"><%= truncate(item.notes, length: 67) %></p>
+    <% end %>
 
-  <p>
-    <%= link_to "Edit", [:edit, current_user, item] %>
-  </p>
+    <span class="badge rounded-pill bg-<%= item.status.parameterize %> fw-normal mb-2">
+      <%= item.status %>
+    </span><br />
+
+    <% if item.link %>
+      <a href=<%= item.link %> target="_blank" class="">
+        <small><%= truncate(item.link, length: 38) %></small>
+      </a>
+    <% end %>
+  </div>
 </div>
-<hr />

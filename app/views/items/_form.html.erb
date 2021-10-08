@@ -1,43 +1,58 @@
-<%= form_with model: [ current_user, @item ], scope: :item  do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+<%= form_with model: [ current_user, @item ], scope: :item, class: "item-form"  do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
+
   <% if @item.type == "Book" %>
-    <div>
-      <%= form.label :author %><br>
-      <%= form.text_field :author %>
+    <div class="mb-3">
+      <%= form.label :author, class: "form-label" %>
+      <%= form.text_field :author, class: "form-control" %>
     </div>
   <% end %>
+
   <% if @item.type == "Music" %>
-    <div>
-      <%= form.label :artist %><br>
-      <%= form.text_field :artist %>
+    <div class="mb-3">
+      <%= form.label :artist, class: "form-label" %>
+      <%= form.text_field :artist, class: "form-control" %>
     </div>
   <% end %>
-  <div>
-    <%= form.label :status %><br>
-    <%= form.select :status, ["Ready to Start", "In Progress", "Paused", "Finished"] %>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, ["Ready to Start", "In Progress", "Paused", "Finished"], {}, class: "form-select" %>
   </div>
-  <div>
-    <%= form.label :rating %><br>
-    <%= form.select :rating, 1..5, { include_blank: true } %>
+
+  <div class="mb-3">
+    <p class="form-label mb-0">Rating</p>
+    <div class="rating">
+      <% rating_titles = ["I hate it", "I don't like it", "It's okay", "I like it", "I love it"] %>
+      <% (1..5).reverse_each do |i| %>
+        <%= form.radio_button :rating, i %>
+        <%= form.label "rating_#{i}", class: "full", title: rating_titles[i - 1] do %>
+          <span class="visually-hidden"><%= i %></span>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-  <div>
-    <%= form.label :link %><br>
-    <%= form.url_field :link %>
+
+  <div class="mb-3">
+    <%= form.label :link, class: "form-label" %>
+    <%= form.url_field :link, class: "form-control" %>
   </div>
-  <div>
-    <%= form.label :notes %><br>
-    <%= form.text_area :notes %>
+
+  <div class="mb-3">
+    <%= form.label :notes, class: "form-label" %>
+    <%= form.text_area :notes, class: "form-control" %>
   </div>
-  <div>
+
+  <div class="d-flex justify-content-end">
     <% if @item.persisted? %>
-      <%= link_to "Destroy", [current_user, @item], method: :delete,
-        data: { confirm: "Are you sure?" } if @item.persisted? %>
-      <%= form.submit "Save" if @item.persisted? %>
+      <%= link_to "Destroy", [current_user, @item], method: :delete, data: { confirm: "Are you sure?" },
+          class: "btn btn-outline-primary me-auto" %>
+      <%= form.submit "Save", class: "btn btn-primary" %>
     <% else %>
-      <%= form.submit "Add" unless @item.persisted? %>
+      <%= form.submit "Add", class: "btn btn-primary align-self-start" %>
     <% end %>
   </div>
 <% end %>

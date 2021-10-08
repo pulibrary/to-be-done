@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-light py-1 px-2 px-md-5">
+  <div class="container-fluid">
+    <%= link_to root_path, class: "navbar-brand fw-bold text-primary" do %>
+      <span>t</span><span>b</span><span>d</span><span>.</span>
+    <% end %>
+    <% if user_signed_in? %>
+      <div class="navbar-nav flex-row align-items-end">
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link pe-4" %>
+        <%= link_to edit_user_registration_path, class: "nav-link" do %>
+          <i class="bi bi-gear-fill fs-5"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</nav>
