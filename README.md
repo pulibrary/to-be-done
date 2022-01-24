@@ -1,26 +1,13 @@
-# README
+# To Be Done [![PULibrary](https://circleci.com/gh/pulibrary/to-be-done.svg?style=svg)](https://app.circleci.com/pipelines/github/pulibrary/to-be-done)
 
-[![PULibrary](https://circleci.com/gh/pulibrary/to-be-done.svg?style=svg)](https://app.circleci.com/pipelines/github/pulibrary/to-be-done)
+A Ruby on Rails applications for tracking what to read, watch, and listen to.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Command Cheatsheet
 
-Things you may want to cover:
+### Starting Server
 
-* Ruby version
+```bin/rails server``` or ```bin/rails s```
 
-* System dependencies
+### Running Tests
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bundle exec rspec```
