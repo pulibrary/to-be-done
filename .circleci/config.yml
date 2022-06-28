@@ -99,6 +99,7 @@ jobs:
           command: |
             bin/rails db:create
             bin/rails db:structure:load
+
       # Run rspec
       - run:
           name: Run rspec
@@ -106,6 +107,7 @@ jobs:
       - store_artifacts:
           path: ~/to-be-done/coverage
           destination: coverage
+
   rubocop:
     executor: to-be-done-executor
     steps:
