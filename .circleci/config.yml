@@ -3,9 +3,9 @@ version: 2.1
 executors:
   to-be-done-executor:
     docker:
-      - image: circleci/ruby:2.6.6-node-browsers
+      - image: circleci/ruby:2.7.5-node-browsers
         environment:
-          BUNDLER_VERSION: 2.2.15
+          BUNDLER_VERSION: 2.2.33
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -99,6 +99,7 @@ jobs:
           command: |
             bin/rails db:create
             bin/rails db:structure:load
+
       # Run rspec
       - run:
           name: Run rspec
@@ -106,6 +107,7 @@ jobs:
       - store_artifacts:
           path: ~/to-be-done/coverage
           destination: coverage
+
   rubocop:
     executor: to-be-done-executor
     steps:
