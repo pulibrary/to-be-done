@@ -4,13 +4,19 @@ A Ruby on Rails applications for tracking what to read, watch, and listen to.
 
 ## Command Cheatsheet
 
+### Installing Dependencies
+
+```bundle install``` and ```yarn install```
+
 ### Starting Server
 
 ```bin/rails server``` or ```bin/rails s```
 
 ### Seeding Data
 
-Run this command in the Heroku console once after initial deployment.
+Run this command in the Heroku console ONCE after initial deployment. Running
+more than once will throw an error because it will try to create a user with an
+already used email address.
 
 ```bin/rails db:seed```
 
